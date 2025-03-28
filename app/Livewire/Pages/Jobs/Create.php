@@ -19,6 +19,11 @@ class Create extends Component
     public $description = '';
     public $experience = '';
     public $salary = '';
+    public $location = '';
+    public $extra = '';
+    public $company_name = '';
+    public $company_logo = '';
+    public $selectedSkills = [];
 
     public function mount()
     {
