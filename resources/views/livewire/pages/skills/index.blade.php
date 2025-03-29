@@ -95,6 +95,11 @@
                             wire:model="name"
                             class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-0 focus:ring-blue-500"
                         >
+                        <div>
+                            @error('name')
+                                <span class="text-red-400">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                         {{-- Save Button --}}
                         <button
