@@ -3,12 +3,14 @@
 namespace App\Livewire\Pages\Skills;
 
 use App\Models\Skills;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Index extends Component
 {
     public $skills;
 
+    #[Validate('required|string|regex:/^([a-zA-Z\s]+,?)+$/')]
     public $name = "";
 
     public $selectedRows = [];
@@ -43,7 +45,9 @@ class Index extends Component
     }
 
     public function save() {
-        Skills::create($this->only('name'));
+        $validated = $this->validate();
+        Skills::create($validated);
+        // Skills::create($this->only('name'));
 
         session()->flash('success', 'New skill added successfully');
 
