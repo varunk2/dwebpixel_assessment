@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <span>{{ skill }}</span>
+    <span>{{ skill.name }}</span>
     <span
         v-if="index !== totalSkills-1"
         class="text-gray-400 text-4xl"
