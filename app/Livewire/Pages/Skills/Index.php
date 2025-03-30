@@ -47,7 +47,6 @@ class Index extends Component
     public function save() {
         $validated = $this->validate();
         Skills::create($validated);
-        // Skills::create($this->only('name'));
 
         session()->flash('success', 'New skill added successfully');
 
@@ -55,8 +54,10 @@ class Index extends Component
     }
 
     public function update() {
+        $validated = $this->validate();
+
         Skills::where('id', $this->currentEditing)
-                ->update(['name' => $this->name]);
+                ->update(['name' => $validated['name']]);
 
         session()->flash('success', 'Skill successfully updated');
 
@@ -69,7 +70,6 @@ class Index extends Component
 
         return $this->redirect('/admin/skills');
     }
-
 
     public function render()
     {
