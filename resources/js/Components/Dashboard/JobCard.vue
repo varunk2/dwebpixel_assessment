@@ -19,14 +19,33 @@ const jobDescription = computed(() => {
             ? props.job.description.substring(0, minDescriptionLength).concat('...')
             : props.job.description
 })
+
+const jobTime = computed(() => {
+    const createdAt = new Date(props.job.created_at);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - createdAt) / 1000);
+
+    // Time intervals in seconds with their labels
+    const intervals = [
+        { label: "day", seconds: 86400 },
+        { label: "hour", seconds: 3600 },
+        { label: "minute", seconds: 60 }
+    ];
+
+    if (diffInSeconds < 60) return "less than a minute ago";
+
+    for (const { label, seconds } of intervals) {
+        const value = Math.floor(diffInSeconds / seconds);
+        if (value >= 1) return `${value} ${label}${value > 1 ? "s" : ""} ago`;
+    }
+})
 </script>
 
 <template>
-    <div class="max-w-2xl mx-auto p-4 bg-white shadow rounded-lg">
+    <div class="max-w-2xl w-full mx-auto p-4 bg-white shadow rounded-lg mt-3">
         <div class="flex items-start justify-between">
             <div>
                 <div class="flex space-x-2">
-                    <img :src="job.company_logo" alt="Company Logo" class="rounded-full">
                     <span>
                         <h2 class="text-lg font-semibold">{{ job.title }}</h2>
                         <p class="text-gray-500">{{ job.company_name }}</p>
@@ -71,6 +90,6 @@ const jobDescription = computed(() => {
             />
         </div>
 
-        <p class="text-gray-600 text-xs text-right" style="margin-top:-20px">2 minutes</p>
+        <p class="text-gray-600 text-xs text-right -mt-2">{{ jobTime }}</p>
     </div>
 </template>
