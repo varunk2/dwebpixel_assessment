@@ -7,6 +7,12 @@
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div class="overflow-x-auto">
+                    @if (session()->has('success'))
+                        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+                            class="bg-green-100 text-green-700 p-3 rounded-md mb-4">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -32,14 +38,14 @@
                                     <td class="px-4 py-3 text-center">
                                         <img src="{{ $job['company_logo'] }}" class="h-12 w-auto block mx-auto" alt="{{ $job['company_name'] }}">
                                     </td>
-                                    <td><span class="font-medium text-gray-900">{{ $job['company_name'] }}</span></td>  
+                                    <td><span class="font-medium text-gray-900">{{ $job['company_name'] }}</span></td>
                                     <td class="px-4 py-3">{{ $job['experience'] }}</td>
                                     <td class="px-4 py-3">{{ $job['salary'] }}</td>
                                     <td class="px-4 py-3">{{ $job['location'] }}</td>
                                     <td class="px-4 py-3">
                                         <div class="flex items-center flex-wrap gap-2">
                                             @foreach ($job['skills'] as $skill)
-                                                <span class="inline-block bg-gray-200 rounded-full px-2 py-0.5 text-xs font-medium text-gray-700">{{ $skill }}</span>
+                                                <span class="inline-block bg-gray-200 rounded-full px-2 py-0.5 text-xs font-medium text-gray-700">{{ $skill['name'] }}</span>
                                             @endforeach
                                         </div>
                                     </td>
@@ -51,7 +57,12 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-3 flex items-center justify-end">
-                                        <a href="#" class="text-sm px-3 py-1.5 rounded hover:bg-slate-100 transition-colors text-red-500">Delete</a>
+                                        <button
+                                            x-on:click="$wire.delete({{ $job['id'] }})"
+                                            class="text-sm px-3 py-1.5 rounded hover:bg-slate-100 transition-colors text-red-500"
+                                        >
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
