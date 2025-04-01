@@ -46,8 +46,17 @@ class Create extends Component
         $validatedData = $this->validate();
 
         if ($this->company_logo) {
-            $filePath = $this->company_logo->store(path: 'public/uploads');
-            $validated['company_logo'] = str_replace('public/', '', $filePath);
+            // Retrieve the original file extension
+            $fileExtension = $this->company_logo->getClientOriginalExtension();
+
+            // Generate a unique filename by hashing the original name and appending the extension
+            $filename = md5($this->company_logo->getClientOriginalName()) . '.' . $fileExtension;
+
+            // Store the file in the 'uploads' directory within the 'public' disk
+            $filePath = $this->company_logo->storeAs('uploads', $filename, 'public');
+
+            // Generate the public URL to access the uploaded file
+            $validatedData['company_logo'] = $filePath;
         }
 
         if ($this->selectedSkills) {
