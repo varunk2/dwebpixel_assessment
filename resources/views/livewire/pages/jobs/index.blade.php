@@ -36,7 +36,7 @@
                                     <th scope="row" class="px-4 py-3 font-semibold text-gray-900 whitespace-nowrap dark:text-white">{{ $job['title'] }}</th>
                                     <td class="px-4 py-3 whitespace-nowrap">{{ str($job['description'])->words(7) }}</td>
                                     <td class="px-4 py-3 text-center">
-                                        <img src="{{ $job['company_logo'] }}" class="h-12 w-auto block mx-auto" alt="{{ $job['company_name'] }}">
+                                        <img src="{{ ($job['company_logo']) }}" class="h-12 w-auto block mx-auto" alt="{{ $job['company_name'] }}">
                                     </td>
                                     <td><span class="font-medium text-gray-900">{{ $job['company_name'] }}</span></td>
                                     <td class="px-4 py-3">{{ $job['experience'] }}</td>
