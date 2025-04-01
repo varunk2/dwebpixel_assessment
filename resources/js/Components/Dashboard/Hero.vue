@@ -12,7 +12,7 @@
             <!-- Search -->
             <div>
                 <div
-                    class="bg-white w-full border rounded-full overflow-hidden border-gray-200 max-w-3xl mx-auto flex items-center justify-center">
+                    class="bg-white w-full border rounded-full overflow-hidden border-gray-200 max-w-4xl mx-auto flex items-center justify-center">
                     <div class="flex-1 flex items-center border-r">
                         <span class="pl-5">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
