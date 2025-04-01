@@ -46,6 +46,7 @@ const jobTime = computed(() => {
         <div class="flex items-start justify-between">
             <div>
                 <div class="flex space-x-2">
+                    <img :src="job.company_logo" alt="Company Logo" class="rounded-full">
                     <span>
                         <h2 class="text-lg font-semibold">{{ job.title }}</h2>
                         <p class="text-gray-500">{{ job.company_name }}</p>
